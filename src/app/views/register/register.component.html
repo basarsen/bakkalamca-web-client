@@ -1,0 +1,10 @@
+<div class="login">
+    <div class="middle">
+        <img src="assets/img/logo.png">
+        <input type="email" #email placeholder="E-posta adresiniz..." required>
+        <input type="password" #password placeholder="Şifreniz..." required>
+        <a (click)="Register(email, password)" class="btn btn-block btn-shadow">Kayıt Ol</a>
+        <br><br>
+        <p>Zaten üye misin? <a routerLink="/login" class="underline">Giriş Yap</a></p>
+    </div>
+</div>  

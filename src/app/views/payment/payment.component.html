@@ -1,0 +1,19 @@
+<div class="padding">
+  <table *ngIf="basket">
+    <tr>
+      <td>
+        Sepet Tutarı
+      </td>
+      <td>{{ Total().total | currency:'TRY' }} </td>
+    </tr>
+    <tr>
+      <td>İndirim Miktarı</td>
+      <td>{{ Total().discount | currency:'TRY' }}</td>
+    </tr>
+    <tr>
+      <td>Ödenecek Tutar</td>
+      <td><b>{{ Total().total - Total().discount |currency:'TRY' }}</b></td>
+    </tr>
+  </table>
+  <a href="javascript:" class="btn btn-block" (click)="Purchase()" style="margin-top:36px">Sipariş Ver</a>
+</div>

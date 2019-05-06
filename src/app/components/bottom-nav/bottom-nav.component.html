@@ -1,0 +1,25 @@
+<div class="bottom-navigation">
+    <ul>
+        <li>
+            <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <i class="fas fa-home"></i>
+            </a>
+        </li>
+        <li>
+            <a routerLink="search" routerLinkActive="active">
+                <i class="fas fa-search"></i>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:" (click)="ShowModal()">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="notification" *ngIf="basket?.products.length">{{ basket.products.length }}</span>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:" routerLink="profile" routerLinkActive="active">
+                <i class="far fa-user"></i>
+            </a>
+        </li>
+    </ul>
+</div>

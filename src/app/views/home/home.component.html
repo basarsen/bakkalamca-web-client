@@ -1,0 +1,10 @@
+<div class="row animated fadeIn">
+  <div class="col-25" *ngFor="let category of categories">
+    <a [routerLink]="['products', category._id]">
+      <div class="home-category-item">
+        <img class="product-image has-shadow category" [src]="category.image" />
+        <p>{{ category.title }}</p>
+      </div>
+    </a>
+  </div>
+</div>

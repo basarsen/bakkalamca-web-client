@@ -1,0 +1,54 @@
+<header>
+  <div class="header-basket animated slideInRight" (click)="showModal = true" *ngIf="basket?.products.length && Total()">
+    <i class="fas fa-shopping-basket"></i>
+    <span>{{ Total() | currency: 'TRY' }}</span>
+  </div>
+</header>
+
+<div class="modal animated slideInUp" *ngIf="showModal">
+  <div class="modal-header">
+    Sepet
+    <a href="javascript:" class="modal-close" (click)="showModal = false">
+      <i class="fas fa-times"></i>
+    </a>
+    <a href="javascript:" class="pull-right" (click)="ResetBasket()">
+      <i class="fas fa-trash"></i>
+    </a>
+  </div>
+  <!-- TODO BASKET COMPONENT'İ YAP -->
+  <div class="modal-body">
+    <ul class="list" *ngIf="basket?.products; else emptyBasket">
+      <li *ngFor="let item of basket.products">
+        <div class="basket-item">
+          <div class="basket-item-image">
+            <img class="product-image has-border basket"
+              src="http://bakkalamca.basarsen.com.tr/images/product/{{item._id}}.jpg" />
+          </div>
+          <div class="basket-item-descriptions">
+            <p class="product-price big">
+                <span *ngIf="item.discount">{{ item.discount | currency:'TRY' }}</span>
+                <span [class.oldprice]="item.discount">{{ item.price | currency:'TRY' }}</span>
+            </p>
+            <p class="product-title">{{ item.title }}</p>
+            <p class="product-description">{{ item.description }}</p>
+          </div>
+          <div class="basket-actions">
+            <a (click)="BasketAction(false, item)"><i class="fas fa-minus"></i></a> <span>{{item.quantity}}</span><a (click)="BasketAction(true, item)"><i class="fas fa-plus"></i></a>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="modal-footer" *ngIf="basket?.products">
+    <a href="javascript:" class="btn btn-block btn-approve-basket" (click)="GoPayment()">Devam
+      <span class="basket-button-price">{{ Total() | currency:'TRY' }}</span>
+    </a>
+  </div>
+</div>
+
+<ng-template #emptyBasket>
+  <div class="padding">
+    Sepetiniz boş.
+  </div>
+</ng-template>

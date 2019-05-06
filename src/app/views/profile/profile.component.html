@@ -1,0 +1,37 @@
+<div class="padding">
+  <div class="box">
+    <h1 class="primary-color"><i class="far fa-user-circle"></i> Profil</h1>
+    <br>
+    <div *ngIf="me">
+      <div class="input-container">
+        <p>Adınız</p>
+        <input type="text" class="bordered" [(ngModel)]="me.name">
+      </div>
+      <div class="input-container">
+        <p>Soyadınız</p>
+        <input type="text" class="bordered" [(ngModel)]="me.lastName">
+      </div>
+      <div class="input-container">
+        <p>E-posta adresiniz</p>
+        <input type="text" class="bordered" [(ngModel)]="me.email">
+      </div>
+      <a href="javascript:" class="btn btn-block" (click)="UpdateMe()">Güncelle</a>
+    </div>
+  </div>
+  <div class="box">
+    <h1 class="primary-color padding"><i class="fas fa-history"></i> Önceki Siparişleriniz</h1>
+    <table>
+      <tr *ngFor="let order of orders">
+        <td><i class="far fa-clock"></i> {{ order.createdAt | amTimeAgo }}</td>
+        <td>
+          <ul>
+            <li *ngFor="let product of order.content; let last = last">
+              (<b>{{product.title}}</b>, {{product.description}}) <span *ngIf="!last">,</span>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <a (click)="Logout()" class="btn btn-block">Çıkış Yap <i class="fas fa-sign-out-alt"></i></a>
+</div>

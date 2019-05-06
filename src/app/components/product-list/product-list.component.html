@@ -1,0 +1,50 @@
+<div class="row" *ngIf="products?.length">
+  <div class="col-33" *ngFor="let product of products" >
+    <div class="product-item animated fadeIn">
+      <div class="basket-actions vertical">
+        <a href="javascript:" (click)="BasketAction(true, product)"><i class="fas fa-plus"></i></a>
+        <span class="animated fadeIn" *ngIf="product.quantity > 0">{{ product.quantity }}</span>
+        <a href="javascript:" class="animated fadeIn" *ngIf="product.quantity > 0"
+          (click)="BasketAction(false, product)"><i class="fas fa-minus"></i></a>
+      </div>
+      <img class="product-image has-border fill product" [class.selected]="product.quantity > 0" [src]="product.image" (click)="selectedProduct = product" />
+      <p class="product-price big">
+        <span *ngIf="product.discount">{{ product.discount | currency:'TRY' }}</span>
+        <span [class.oldprice]="product.discount">{{ product.price | currency:'TRY' }}</span>
+      </p>
+      <p class="product-title">{{ product.title }}</p>
+      <p class="product-description">{{ product.description }}</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal animated slideInUp" *ngIf="selectedProduct">
+  <div class="modal-header">
+    Ürün Detayı
+    <a href="javascript:" class="modal-close" (click)="selectedProduct = null">
+      <i class="fas fa-times"></i>
+    </a>
+  </div>
+  <div class="modal-body center">
+    <img class="img-product-detail" [src]="selectedProduct.image" />
+    <p class="product-price big">
+        <span *ngIf="selectedProduct.discount">{{ selectedProduct.discount | currency:'TRY' }}</span>
+        <span [class.oldprice]="selectedProduct.discount">{{ selectedProduct.price | currency:'TRY' }}</span>
+    </p>
+    <p class="product-title">{{ selectedProduct.title }}</p>
+    <p class="product-description">{{ selectedProduct.description }}</p>
+  </div>
+  <div class="modal-footer center">
+    <a href="javascript:" class="btn btn-block" (click)="BasketAction(true, selectedProduct)" *ngIf="!selectedProduct.quantity">Sepete Ekle</a>
+    <div class="basket-actions big" *ngIf="selectedProduct.quantity > 0">
+      <a href="javascript:" (click)="BasketAction(false, selectedProduct)"><i class="fas fa-minus"></i></a> 
+      <span>{{ selectedProduct.quantity }}</span>
+      <a href="javascript:" (click)="BasketAction(true, selectedProduct)"><i class="fas fa-plus"></i></a>
+    </div>
+  </div>
+</div>
+<ng-template #noproduct>
+  <p class="padding">
+    Yalnızca "su" ve "içecek" kategorilerinde ürün bulunmaktadır.
+  </p>
+</ng-template>
